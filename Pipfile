@@ -4,6 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
+flake8 = "*"
 
 [packages]
 chromedriver-binary = "==73.0.3683.68.0"
@@ -15,3 +16,4 @@ python_version = "3.6"
 
 [scripts]
 main = "python main.py"
+lint = "flake8 main.py"
