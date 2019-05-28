@@ -1,7 +1,7 @@
 import os
 import sys
 import time
-import chromedriver_binary
+import chromedriver_binary  # noqa: F401
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -10,9 +10,9 @@ BASE_URL = 'https://ticket.line.me/'
 
 RETRY_COUNT = 3
 
-EVENT_NUMBER = os.environ.get('EVENT_NUMBER', 2285)  # 青○高校
-EVENT_SEARCH_FILTER = {'DAY': os.environ.get('EVENT_DAY', '05.29'),  # 公演の日付
-                       'NUM': int(os.environ.get('EVENT_NUM', 1))}  # 何公演目か(同日に複数公演がある場合)
+EVENT_NUMBER = os.environ.get('EVENT_NUMBER', 2285)
+EVENT_SEARCH_FILTER = {'DAY': os.environ.get('EVENT_DAY', '05.29'),
+                       'NUM': int(os.environ.get('EVENT_NUM', 1))}
 TICKET_TYPE_FILETER = {'TYPE': os.environ.get('TICKET_TYPE', 'シーティング')}
 TICKET_NUM = {'ADULT': int(os.environ.get('TICKET_NUM_ADULT', 2)),
               'STUDENT': int(os.environ.get('TICKET_NUM_STUDENT', 0))}
@@ -50,10 +50,11 @@ def fetch_event_list(driver):
 
 
 def search_event(event_list):
-    search_event_list = [e for e in event_list if e['text'].startswith(EVENT_SEARCH_FILTER['DAY'])]
+    daystr = EVENT_SEARCH_FILTER['DAY']
+    search_event_list = [e for e in event_list if e['text'].startswith(daystr)]
     if len(search_event_list) < EVENT_SEARCH_FILTER['NUM']:
-        msg = 'EVENT_SEARCH_FILTER[\'NUM\'] out of range [{}]'.format(len(search_event_list))
-        sys.stderr.write(msg)
+        msg = 'EVENT_SEARCH_FILTER[\'NUM\'] out of range [{}]'
+        sys.stderr.write(msg.format(len(search_event_list)))
         exit(1)
     return search_event_list[EVENT_SEARCH_FILTER['NUM'] - 1]
 
@@ -63,7 +64,8 @@ def get_ticket(driver, event):
     ticket_type = TICKET_TYPE_FILETER['TYPE']
     ticket_els = []
     for i in range(RETRY_COUNT):
-        ticket_els = driver.find_elements(By.CLASS_NAME, 'mdMultiTicketTypeSeatItemInner')
+        class_name = 'mdMultiTicketTypeSeatItemInner'
+        ticket_els = driver.find_elements(By.CLASS_NAME, class_name)
         if len(ticket_els) > 0:
             break
         time.sleep(1)
@@ -106,18 +108,18 @@ def get_ticket(driver, event):
     if TICKET_NUM['ADULT'] > 0:
         ticket_num_els[0].click()
         options_els = driver.find_elements(By.CLASS_NAME, 'mdDropdownItem')
-        if len(options_els) - 1  < TICKET_NUM['ADULT']:
-            msg = 'ticket_num[ADULT] out of range [{}]'.format(len(options_els) - 1)
-            sys.stderr.write(msg)
+        if len(options_els) - 1 < TICKET_NUM['ADULT']:
+            msg = 'ticket_num[ADULT] out of range [{}]'
+            sys.stderr.write(msg.format(len(options_els) - 1))
             exit(1)
         options_els[TICKET_NUM['ADULT']].click()
 
     if TICKET_NUM['STUDENT'] > 0:
         ticket_num_els[1].click()
         options_els = driver.find_elements(By.CLASS_NAME, 'mdDropdownItem')
-        if len(options_els) - 1  < TICKET_NUM['STUDENT']:
-            msg = 'ticket_num[ADULT] out of range [{}]'.format(len(options_els) - 1)
-            sys.stderr.write(msg)
+        if len(options_els) - 1 < TICKET_NUM['STUDENT']:
+            msg = 'ticket_num[ADULT] out of range [{}]'
+            sys.stderr.write(msg.format(len(options_els) - 1))
             exit(1)
         options_els[TICKET_NUM['STUDENT']].click()
 
