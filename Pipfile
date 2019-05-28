@@ -1,0 +1,17 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+chromedriver-binary = "==73.0.3683.68.0"
+selenium = "==3.141.0"
+PyYAML = "*"
+
+[requires]
+python_version = "3.6"
+
+[scripts]
+main = "python main.py"
