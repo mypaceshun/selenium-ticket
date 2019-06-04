@@ -7,8 +7,8 @@ verify_ssl = true
 flake8 = "*"
 
 [packages]
-chromedriver-binary = "==73.0.3683.68.0"
-selenium = "==3.141.0"
+chromedriver-binary = "==74.0.3729.6.0"
+selenium = "*"
 PyYAML = "*"
 
 [requires]
