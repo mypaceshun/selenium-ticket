@@ -20,6 +20,8 @@ TICKET_NUM = {'ADULT': int(os.environ.get('TICKET_NUM_ADULT', 2)),
 USERID = os.environ.get('USERID', 'userid')
 PASSWORD = os.environ.get('PASSWORD', 'password')
 
+QUICK = os.environ.get('QUICK', False)
+
 
 def main():
     options = Options()
@@ -126,8 +128,12 @@ def get_ticket(driver, event):
     submit_el = driver.find_element(By.CLASS_NAME, 'MdButton')
     submit_el.click()
 
-    # 3秒で確認しな
-    time.sleep(3)
+    if QUICK:
+        # 1秒で確認しな
+        time.sleep(1)
+    else:
+        # 3秒で確認しな
+        time.sleep(3)
     submit_els = driver.find_elements(By.CLASS_NAME, 'MdButton')
     submit_els[1].click()
 
