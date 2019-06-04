@@ -28,8 +28,8 @@ def main():
     event_list = fetch_event_list(driver)
     event = search_event(event_list)
     get_ticket(driver, event)
-    print('ここまでやってあげたから後は頑張って')
-    time.sleep(20000)
+    print('ここまでやってあげたから後は頑張って[Enter]:', end="")
+    input()
 
 
 def fetch_event_list(driver):
