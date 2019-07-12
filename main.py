@@ -10,6 +10,8 @@ BASE_URL = 'https://ticket.line.me/'
 
 RETRY_COUNT = 3
 
+# Artistsページからの検索が優先
+ARTIST_NUMBER = os.environ.get('ARTIST_NUMBER', None)
 EVENT_NUMBER = os.environ.get('EVENT_NUMBER', 2285)
 EVENT_SEARCH_FILTER = {'DAY': os.environ.get('EVENT_DAY', '05.29'),
                        'NUM': int(os.environ.get('EVENT_NUM', 1))}
@@ -35,8 +37,12 @@ def main():
 
 
 def fetch_event_list(driver):
-    event_url = '{}events/{}'.format(BASE_URL, EVENT_NUMBER)
-    driver.get(event_url)
+    url = None
+    if ARTIST_NUMBER is None:
+        url = '{}events/{}'.format(BASE_URL, EVENT_NUMBER)
+    else:
+        url = '{}artists/{}'.format(BASE_URL, ARTIST_NUMBER)
+    driver.get(url)
     a_els = []
     for i in range(RETRY_COUNT):
         a_els = driver.find_elements(By.CLASS_NAME, 'mdPerformanceListItem')
@@ -129,8 +135,8 @@ def get_ticket(driver, event):
     submit_el.click()
 
     if QUICK:
-        # 1秒で確認しな
-        time.sleep(1)
+        # 0秒で確認しな
+        pass
     else:
         # 3秒で確認しな
         time.sleep(3)
