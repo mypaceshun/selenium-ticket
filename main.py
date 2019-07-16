@@ -136,7 +136,7 @@ def get_ticket(driver, event):
 
     if QUICK:
         # 0秒で確認しな
-        pass
+        time.sleep(1)
     else:
         # 3秒で確認しな
         time.sleep(3)
