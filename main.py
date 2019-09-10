@@ -135,7 +135,7 @@ def get_ticket(driver, event):
     submit_el.click()
 
     if QUICK:
-        # 0秒で確認しな
+        # 1秒で確認しな
         time.sleep(1)
     else:
         # 3秒で確認しな
@@ -153,6 +153,11 @@ def get_ticket(driver, event):
     radio_els[1].click()  # クレカ
     submit_el = driver.find_element(By.CLASS_NAME, 'MdButton')
     submit_el.click()
+
+    # 支払い確定ボタンを押す
+    if QUICK:
+        submit_el = driver.find_element(By.CLASS_NAME, 'ExThemePinkyred')
+        submit_el.click()
 
 
 if __name__ == '__main__':
