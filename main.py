@@ -156,7 +156,7 @@ def get_ticket(driver, event):
 
     # 支払い確定ボタンを押す
     if QUICK:
-        submit_el = driver.find_element(By.CLASS_NAME, 'ExThemePinkyred')
+        submit_el = driver.find_element(By.CLASS_NAME, 'MdButton')
         submit_el.click()
 
 
