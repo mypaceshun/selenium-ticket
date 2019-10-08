@@ -155,9 +155,11 @@ def get_ticket(driver, event):
     submit_el.click()
 
     # 支払い確定ボタンを押す
-    if QUICK:
-        submit_el = driver.find_element(By.CLASS_NAME, 'MdButton')
-        submit_el.click()
+    # これは失敗する
+    # if QUICK:
+    #     time.sleep(1)
+    #     submit_el = driver.find_element(By.CLASS_NAME, 'MdButton')
+    #     submit_el.click()
 
 
 if __name__ == '__main__':
