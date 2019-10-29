@@ -27,6 +27,7 @@ QUICK = os.environ.get('QUICK', False)
 
 def main():
     options = Options()
+    options.add_argument('--incognito')
     # options.add_argument('--headless')
     driver = webdriver.Chrome(chrome_options=options)
     event_list = fetch_event_list(driver)
