@@ -79,11 +79,11 @@ def get_ticket(driver, event):
             break
         time.sleep(1)
 
-    is_enable_el = driver.find_elements(By.CLASS_NAME, 'ExDisabled')
-    if len(is_enable_el) > 0:
-        msg = '予定枚数終了しました'
-        sys.stderr.write(msg)
-        exit(1)
+    # is_enable_el = driver.find_elements(By.CLASS_NAME, 'ExDisabled')
+    # if len(is_enable_el) > 0:
+    #     msg = '予定枚数終了しました'
+    #     sys.stderr.write(msg)
+    #     exit(1)
 
     search_ticket_list = [e for e in ticket_els if ticket_type in e.text]
     if len(search_ticket_list) == 0:
