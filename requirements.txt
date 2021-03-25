@@ -1,5 +1,5 @@
--i https://pypi.org/simple
-chromedriver-binary==73.0.3683.68.0
-pyyaml==5.1
+-i https://pypi.org/simple/
+chromedriver-binary==78.0.3904.105.0
+pyyaml==5.4
 selenium==3.141.0
-urllib3==1.25.3
+urllib3==1.26.4
